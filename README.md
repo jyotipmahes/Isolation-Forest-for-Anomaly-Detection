@@ -4,7 +4,7 @@
 The goal of this project is to implement the original [Isolation Forest](IsolationForestPaper.pdf) algorithm by Fei Tony Liu, Kai Ming Ting, and Zhi-Hua Zhou as a part of MSDS689 course.  (A later version of this work is also available: [Isolation-based Anomaly Detection](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.673.5779&rep=rep1&type=pdf).) There are two general approaches to anomaly detection: 
 
 1. model what normal looks like and then look for nonnormal observations
-2. focus on the anomalies, which are few and different. This is the interesting and relatively-new approach taken by the authors of isolation forests.
+2. focus on the anomalies, which are few and different. This is an interesting and relatively-new approach taken by the authors of isolation forests.
 
 The isolation forest algorithm is original and beautiful in its simplicity; and also seems to work very well, with a few known weaknesses. The academic paper is extremely readable so you should start there.
 
@@ -55,7 +55,7 @@ Using [plot_anomalies.py](https://github.com/parrt/msds689/blob/master/projects/
 
 ## Algorithm
 
-The algorithm is based on the idea that the anomalies occur in isolation and it is much easier to seperate anomalies using random split in the feature range compared to normal instances. To simplify, anomalies are rare and different which occurs in isolations. The algorithm, randomly selects a small subset of observations. Next we randomly select a feature column and a split value from selected feature which lies between the min and max values. Note that, the current algorithm only works for continuous features. We keep growing the trees till the termination condition is reached. We repeate the same process and grow a forest to reduce varaince. Anomaly score is calculated based on the average path length of each observation across the forest. We normalize the length with the standard height of a binary tree and expect the length of anomaly to be smaller compared to normal instances. For convenience, here are the algorithms extracted from the Liu *et al* paper:
+The algorithm is based on the idea that the anomalies occur in isolation and it is much easier to separate anomalies using random split in the feature range compared to normal instances. To simplify, anomalies are rare and different which occurs in isolations. The algorithm randomly selects a small subset of observations. Next, we randomly select a feature column and a split value from the selected feature which lies between the min and max values. Note that, the current algorithm only works for continuous features. We keep growing the trees till the termination condition is reached. We repeat the same process and grow a forest to reduce varaince. Anomaly score is calculated based on the average path length of each observation across the forest. We normalize the length with the standard height of a binary tree and expect the length of the anomaly to be smaller compared to normal instances. For convenience, here are the algorithms extracted from the Liu *et al* paper:
 
 <table border="0">
 <tr>
@@ -78,5 +78,5 @@ Please use this version of average path length <tt>c()</tt>, not the one in the 
 </tr>
 </table>
 
-Note that, we also implement a **improved version** of this algorithm which can handle noisy labels by making the split point unbalanced rather than choosing the split value uniformly from the min and max value. The implementation can be found in [iforest.py](iforest.py)
+Note that, we also implement an **improved version** of this algorithm which can handle noisy labels by making the split point unbalanced rather than choosing the split value uniformly from the min and max value. The implementation can be found in [iforest.py](iforest.py)
 
